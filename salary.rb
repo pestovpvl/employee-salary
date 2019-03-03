@@ -1,10 +1,14 @@
 class  Employee
     attr_reader :name
-
+   
     def name=(name)
         if name == ""
             raise "name Can't be blank"
         end
+        @name = name
+    end
+
+    def initialize(name = "Anonymous")
         @name = name
     end
 
@@ -14,17 +18,21 @@ class  Employee
 end
 
 class SalaryEmployee < Employee
-    def initialize(name = "Anonymous", salary = 0.0)
-        @name = name
-        @salary = salary
-    end
+
     attr_reader :salary
+    
     def salary=(salary)
         if salary < 0
             raise "Salary #{salary} can't be less than 0"
         end
         @salary = salary
     end
+
+    def initialize(name = "Anonymous", salary = 0.0)
+        super(name)
+        self.salary = salary
+    end
+
     def print_pay_stub
         print_name
         pay_for_period = (salary / 365.0) * 14
@@ -34,15 +42,20 @@ class SalaryEmployee < Employee
 end
 
 class HourlyEmployee < Employee
+    def self.security_guard(name)
+        HourlyEmployee.new(name, 19.25,  30)
+    end
+
+    def self.cashier(name)
+        HourlyEmployee.new(name, 19.25,  30)
+    end
+
+    def self.janitor(name)
+        HourlyEmployee.new(name, 19.25,  30)
+    end
 
     attr_reader :hourly_wage, :hours_per_week
   
-    def initialize(name = "Anonymous", hourly_wage = 0.0, hours_per_week = 0.0)
-        @name = name
-        @hourly_wage = hourly_wage
-        @hours_per_week = hours_per_week
-    end
-
     def hourly_wage=(hourly_wage)
         if hourly_wage < 0
             raise "Salary #{hourly_wage} can't be less than 0"
@@ -56,6 +69,12 @@ class HourlyEmployee < Employee
         end
         @hours_per_week = hours_per_week
     end
+    
+    def initialize(name = "Anonymous", hourly_wage = 0, hours_per_week = 0)
+        super(name)
+        self.hourly_wage = hourly_wage
+        self.hours_per_week = hours_per_week
+    end
 
     def print_pay_stub
         print_name
@@ -66,12 +85,10 @@ class HourlyEmployee < Employee
 end
 
 emloyee = SalaryEmployee.new
-emloyee.name
-emloyee.salary
+emloyee.name = "Empl1"
+emloyee.salary = 100
 emloyee.print_pay_stub
 
-emloyee2 = HourlyEmployee.new
-emloyee2.hours_per_week = 40
-emloyee2.hourly_wage = 10
+emloyee2 = HourlyEmployee.janitor("Egor")
 emloyee2.print_pay_stub
 
