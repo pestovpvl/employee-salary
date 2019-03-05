@@ -1,26 +1,22 @@
+
 class  Employee
     attr_reader :name
-   
     def name=(name)
         if name == ""
             raise "name Can't be blank"
         end
         @name = name
     end
-
     def initialize(name = "Anonymous")
         @name = name
     end
-
     def print_name
         puts "Name: #{name}"
     end
 end
 
 class SalaryEmployee < Employee
-
     attr_reader :salary
-    
     def salary=(salary)
         if salary < 0
             raise "Salary #{salary} can't be less than 0"
@@ -34,7 +30,8 @@ class SalaryEmployee < Employee
     end
 
     def print_pay_stub
-        print_name
+        # We can write like this: self.prnt_name
+        print_name 
         pay_for_period = (salary / 365.0) * 14
         formatted_pay = format("$%.2f", pay_for_period)
         puts "Pay This Period: #{formatted_pay}"
@@ -45,11 +42,9 @@ class HourlyEmployee < Employee
     def self.security_guard(name)
         HourlyEmployee.new(name, 19.25,  30)
     end
-
     def self.cashier(name)
         HourlyEmployee.new(name, 19.25,  30)
     end
-
     def self.janitor(name)
         HourlyEmployee.new(name, 19.25,  30)
     end
@@ -62,20 +57,17 @@ class HourlyEmployee < Employee
         end
         @hourly_wage = hourly_wage
     end
-
     def hours_per_week=(hours_per_week)
         if hours_per_week < 0
             raise "Salary #{hours_per_week} can't be less than 0"
         end
         @hours_per_week = hours_per_week
     end
-    
     def initialize(name = "Anonymous", hourly_wage = 0, hours_per_week = 0)
         super(name)
         self.hourly_wage = hourly_wage
         self.hours_per_week = hours_per_week
     end
-
     def print_pay_stub
         print_name
         pay_for_two_week = hours_per_week * hourly_wage * 2
