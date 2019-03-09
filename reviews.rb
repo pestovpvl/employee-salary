@@ -6,8 +6,7 @@ end
 
 relevant_lines = []
 
-relevant_lines = lines.find_all { |line| line.include?("Truncated") }
-
+relevant_lines = lines.find_all { |line| line.include?("Truncated")}
 
 
 puts relevant_lines
